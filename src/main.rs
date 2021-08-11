@@ -28,6 +28,14 @@ fn ascii_decimal() -> &'static str {
     ""
 }
 
+fn hex(i: i32) -> String {
+    if i == 0 {
+        return format!("00")
+    }
+    format!("{:#02x}", i).replace("0x", "").to_uppercase()
+}
+
+
 #[cfg(test)]
 mod tests {
     // Note this useful idiom: importing names from outer (for mod tests) scope.
@@ -59,5 +67,22 @@ mod tests {
         assert_eq!("", String::from_utf8(output.stdout).unwrap());
     }
 
+    fn test_hex_formatting()
+    {
+        assert_eq!("00", hex(0));
+        assert_eq!("08", hex(8));
+        assert_eq!("0F", hex(15));
+        assert_eq!("10", hex(16));
+    }
+    // dec -> hex
+    // 0   -> 00
+    // 8   -> 08
+    // 15  -> 0F
+    // 16  -> 10
+    // 127 -> 7F (del)
+    // dec -> octal
+    // 0   -> 000
+    // 7   -> 007
+    // 8   -> 010
 }
 
