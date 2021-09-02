@@ -29,10 +29,7 @@ fn ascii_decimal() -> &'static str {
 }
 
 fn hex(i: i32) -> String {
-    if i == 0 {
-        return format!("00")
-    }
-    format!("{:#02x}", i).replace("0x", "").to_uppercase()
+    format!("{:02X}", i)
 }
 
 
@@ -67,6 +64,7 @@ mod tests {
         assert_eq!("", String::from_utf8(output.stdout).unwrap());
     }
 
+    #[test]
     fn test_hex_formatting()
     {
         assert_eq!("00", hex(0));
